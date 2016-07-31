@@ -41,20 +41,42 @@ Wing IDE 101을 내려받습니다. 다른 IDE나 텍스트 에디터를 사용�
   <p>Python은 다들 어느 정도 쓸 줄 아시죠? 이제는 pygame의 기본 기능을 학습해 보도록
 합시다.</p>
 
-<p>새 python파일을 만들고, 다음과 같이 적습니다.<br />
-<code class="highlighter-rouge">python
-import pygame
-</code></p>
+<p>새 python파일을 만들고, 다음과 같이 적습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygame</span></code></pre></figure>
 
 <p>이제 pygame 모듈에 구현된 모든 기능을 바로 이용할 수 있습니다.
-다만, 좀 더 편리한 개발을 위해 약간의 준비를 더 해야 합니다.<br />
-<code class="highlighter-rouge">python
-import pygame
-from pygame.locals import *
-</code></p>
+다만, 좀 더 편리한 개발을 위해 약간의 준비를 더 해야 합니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span></code></pre></figure>
 
 <p>from 명령으로 pygame모듈 안에 정의되어 있는 로컬 변수와 상수들을 가져왔습니다. pygame안에는 <code class="highlighter-rouge">QUIT</code>, <code class="highlighter-rouge">K_UP</code>, <code class="highlighter-rouge">K_DOWN</code>등의 여러 상수들이 미리 정의되어 있습니다.
 그냥 import만 해도 <code class="highlighter-rouge">pygame.QUIT</code>, <code class="highlighter-rouge">pygame.K_UP</code>등으로 사용이 가능하지만, 매번 <code class="highlighter-rouge">pygame.</code>을 치기 귀찮은 상황이 올 수도 있으니 적어 둡시다.</p>
+
+<p>게임의 기본이 될 화면을 만들어 봅시다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">from</span> <span class="nn">pygame.locals</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">480</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span></code></pre></figure>
+
+<p>pygame.init()은 pygame 모듈을 초기화시킵니다. 간혹 제대로 구현되지 않는 기능이 있을 수 있기에 사용합니다.<br />
+위의 코드를 통해 640 x 480 크기의 창을 만들었습니다. 다른 숫자를 입력한다면 다른 크기의 창을 만들 수 있겠죠?</p>
+
+<p>위의 코드들은 게임이 실행될 때 처음 단 한 번만 실행되는 코드들입니다. 즉, 게임의 기본 설정을 담당하는 부분이라고 할 수 있습니다.<br />
+실제 게임에서는 화면을 끊임없이 표시해 줘야 하므로, 한 번만 실행되는 코드만으로는 만들 수 없습니다.<br />
+따라서 저희는 <code class="highlighter-rouge">while</code> 문법을 통해 특정 코드들을 게임이 실행되는 동안 끝없이 반복시킬 것입니다.</p>
+
+<p>코드의 맨 아래에 다음과 같은 코드를 다시 써 넣읍시다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></code></pre></figure>
+
 
 
   <a href="/main/2016/02/13/sample-content.html"><h1>Welcome to Jekyll!</h1></a>
