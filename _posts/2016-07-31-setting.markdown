@@ -1,0 +1,17 @@
+---
+layout: default
+title:  "개발환경 세팅하기"
+date:   2016-02-12 17:50:00
+categories: main
+---
+
+Python을 쓰려면 먼저 사전 작업이 조금 필요합니다.  
+먼저 [https://www.python.org/downloads/](https://www.python.org/downloads/)에서
+Python 2.7을 내려받아 설치합니다.  
+그리고
+[http://www.pygame.org/download.shtml](http://www.pygame.org/download.shtml)에서
+pygame을 내려받아 설치합니다.  
+마지막으로
+[http://wingware.com/downloads/wingide-101/5.1.12-1](http://wingware.com/downloads/wingide-101/5.1.12-1)에서
+Wing IDE 101을 내려받습니다. 다른 IDE나 텍스트 에디터를 사용하고 싶다면,
+사용해도 괜찮습니다.

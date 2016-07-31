@@ -1,6 +1,5 @@
-# A sample Gemfile
-source "https://rubygems.org"
-
+source 'https://rubygems.org'
 gem 'jekyll'
 gem 'jekyll-paginate'
-# gem "rails"
+gem 'kramdown'
+gem 'pygments.rb'

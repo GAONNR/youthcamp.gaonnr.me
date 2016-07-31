@@ -1,0 +1,17 @@
+# Setup
+title:        2016 KAIST YOUTH CAMP
+tagline:      Python Level 1 - Python을 활용한 퍼즐게임(테트리스) 만들기
+baseurl:      ""
+paginate:     3
+
+# About/contact
+author:
+  name:       Ji Junseop
+  url:        http://blog.gaonnr.me
+
+# Gems
+gems:
+  - jekyll-paginate
+
+#Others
+markdown: kramdown
