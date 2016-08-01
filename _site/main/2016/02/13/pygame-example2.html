@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  
+  <head>
+  <meta charset="UTF-8">
+  <title>2016 KAIST YOUTH CAMP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/cayman.css">
+</head>
+
+  <body>
+    <section class="page-header">
+  <h1 class="project-name">2016 KAIST YOUTH CAMP</h1>
+  <h2 class="project-tagline">Python Level 1 - Python을 활용한 퍼즐게임(테트리스) 만들기</h2>
+  <!--
+  <a href="#" class="btn">View on GitHub</a>
+  <a href="#" class="btn">Download .zip</a>
+  <a href="#" class="btn">Download .tar.gz</a>
+-->
+</section>
+
+
+    <section class="main-content">
+      
+      <h1>pygame 예제 - Step 2</h1>
+<p>이제 화면에 표시된 이미지를 움직여 봅시다.
+이미지를 변경하는 것은 기본적으로 이미지의 좌표를 시간에 따라 변경해주는 일과 동일합니다.<br />
+예를 들어서 앞의 <code class="highlighter-rouge">player</code> 위치의 X좌표를 <code class="highlighter-rouge">locationX</code>라 하고, <code class="highlighter-rouge">while</code>문을 한 번 돌 때마다 X좌표를 1씩 더해주면, 이미지는 오른쪽으로 움직이는 것처럼 보일 것입니다.</p>
+
+<p>다만 여기서 유의해야 할 점이 하나 있습니다.<br />
+while문은 어느 정도의 빠르기로 돌아가는 것일까요?<br />
+똑같이 X좌표를 1씩 더해주어도, while문이 1초에 60번 도는 것과 1초에 30분 도는 것과는, 눈으로 보기에 두 배의 속도 차이가 있습니다.<br />
+또한 컴퓨터의 성능이 낮다면, 성능이 좋은 컴퓨터에서 돌리는 것과 빠르기가 다를 수 있을 것입니다.<br />
+따라서 게임의 FPS(Frames Per Second)를 조절해주는 것이 필요합니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">FPS</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span></code></pre></figure>
+
+<p>다음과 같은 코드를 게임이 실행될 때 단 한 번 실행되도록 적어 줍니다. 그 후, while문 안에는 다음과 같은 소스를 추가합니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="n">FPS</span><span class="p">)</span></code></pre></figure>
+
+<p>위에서 FPS를 30으로 설정했기 때문에, 이제 게임은 1초에 30번 화면을 업데이트하여 보여주게 되었습니다. 보통 사람은 24프레임 부근부터 연속적인 움직임이라고 인식하며, 60프레임 정도면 매우 부드러운 움직임이라고 인식합니다. 다만, 저희가 만들 게임인 테트리스는 연속적인 움직임이 많이 필요하지 않으므로, FPS가 매우 낮아도 상관없습니다.</p>
+
+<p><br />
+이 때, 움직이는 이미지를 하나뿐이 아닌, 여러 개, 혹은 수백 개 만들어 주고 싶다면 어떻게 해야 할까요? 이미지 하나하나의 좌표를 담당하는 변수를 일일이 선언해서 관리해 줄 수도 있겠지만, 이미지가 많으면 많아질수록, 귀찮은 작업이 됩니다. 이럴 때 필요한 것이 바로 객체 지향 프로그래밍(OOP) 입니다.<br />
+아래와 같이 이미지 파일, (x, y)좌표, 속도, 새를 화면에 보여주는 함수, 새를 움직이는 함수를 포함한 Bird class를 만들었습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Bird</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imageName</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">spd</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageName</span> <span class="o">=</span> <span class="n">imageName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">location</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spd</span> <span class="o">=</span> <span class="n">spd</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">imageName</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">location</span>
+        <span class="n">X</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">()</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">__init__</code> 함수는 새로운 Bird class가 선언되면 반드시 처음 실행되는 함수입니다. 이곳에서 class 내부 변수들을 초기화하고, 함수들을 불러올 수도 있습니다.<br />
+<code class="highlighter-rouge">self</code>는 자기 자신을 의미하며, <code class="highlighter-rouge">self.location = location</code>은 Bird class 내에 location이라는 변수를 만들고, 그 값에 class가 선언될 때에 인자로 부여받은 <code class="highlighter-rouge">location</code>값을 대입하겠다는 의미입니다.<br />
+예를 들어, 게임 내부에서 <code class="highlighter-rouge">test_bird = Bird(image, (0, 0), 3)</code>이라고 새로운 Bird를 생성하였다면, <code class="highlighter-rouge">test_bird</code>의 <code class="highlighter-rouge">location</code>은 (0, 0), <code class="highlighter-rouge">spd</code>는 3이 되겠죠. (self는 인자로 따로 넣어 줄 필요가 없습니다.)</p>
+
+<p>이후 표시할 이미지를 각각 <code class="highlighter-rouge">bird1.png</code>, <code class="highlighter-rouge">bird2.png</code>, <code class="highlighter-rouge">bird3.png</code>로 저장하고, 다음과 같은 코드를 작성해 보았습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">bird1</span> <span class="o">=</span> <span class="n">Bird</span><span class="p">(</span><span class="s">'bird1.png'</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">bird2</span> <span class="o">=</span> <span class="n">Bird</span><span class="p">(</span><span class="s">'bird2.png'</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">bird3</span> <span class="o">=</span> <span class="n">Bird</span><span class="p">(</span><span class="s">'bird3.png'</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="n">birds</span> <span class="o">=</span> <span class="p">[</span><span class="n">bird1</span><span class="p">,</span> <span class="n">bird2</span><span class="p">,</span> <span class="n">bird3</span><span class="p">]</span></code></pre></figure>
+
+<p>그 후 while문 안에 다음과 같은 코드를 적었습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">bird</span> <span class="ow">in</span> <span class="n">birds</span><span class="p">:</span>
+    <span class="n">bird</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p>이제 게임을 실행하면, Python은 birds 리스트를 순환하면서 내부에 있는 bird의 show함수를 실행시킬 것입니다. 새들이 각기 다른 위치에서 다른 속도로 날아가는 걸 보실 수 있습니다.</p>
+
+<p><br />
+이제 테트리스 개발에 필요한 지식을 거의 다 갖췄습니다. 이제 테트리스를 만들어 볼 시간입니다.
+혹시나 더 궁금한 게 있다면,<br />
+<a href="http://www.gimo.co.kr/game_dev/985">http://www.gimo.co.kr/game_dev/985</a><br />
+<a href="http://xe.obg.co.kr/index.php?mid=programming&amp;order_type=desc&amp;category=7767&amp;document_srl=7933">http://xe.obg.co.kr/index.php?mid=programming&amp;order_type=desc&amp;category=7767&amp;document_srl=7933</a><br />
+<a href="http://www.pygame.org/docs/">http://www.pygame.org/docs/</a><br />
+<a href="http://devnauts.tistory.com/61">http://devnauts.tistory.com/61</a> 등을 참고하시기 바랍니다.</p>
+
+
+
+      <footer class="site-footer">
+  <span class="site-footer-owner"><a href="">2016 KAIST YOUTH CAMP</a> is maintained by <a href="http://blog.gaonnr.me">Ji Junseop</a>.</span>
+  <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/pietromenna/jekyll-cayman-theme">Cayman theme</a> by <a href="http://github.com/jasonlong">Jason Long</a>.</span>
+</footer>
+
+
+    </section>
+
+  </body>
+</html>
