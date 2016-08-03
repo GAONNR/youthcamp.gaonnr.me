@@ -71,7 +71,7 @@ pygame은 게임이 실행 중 발생한 이벤트들을 담아 놓고, 이를 p
 if event.type == KEYDOWN:
     if event.key == K_RIGHT:
         # source #
-    elif event.key == K_LEFT
+    elif event.key == K_LEFT:
         # source #
     elif event.key == K_DOWN:
         # source #
