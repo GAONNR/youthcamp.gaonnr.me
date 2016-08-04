@@ -90,7 +90,7 @@ if event.type == KEYDOWN:
 player = pygame.image.load('player_test.png')
 {% endhighlight %}
 
-위 코드는 player_test.png라는 이미지를 불러와 앞으로 player라고 부르게 해 주는 코드입니다. 이제 player를 화면의 어디에 배치할지 마음대로 정할 수 있습니다.  
+위 코드는 player_test.png라는 이미지를 불러와 앞으로 player라고 부르게 해 주는 코드입니다. 이제 player를 화면의 어디에 배치할지 마음대로 정할 수 있습니다.
 {% highlight python %}
 screen.blit(player, (0, 0))
 {% endhighlight %}
