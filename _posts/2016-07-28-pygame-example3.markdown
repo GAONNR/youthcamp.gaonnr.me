@@ -25,6 +25,8 @@ screen.blit(player, playerRect)
 와 같은 코드로 원하는 좌표를 이미지의 중심으로 하게 할 수도 있습니다.
 
 `Surface.get_size()` 함수를 이용하면 이미지나 Surface의 크기를 가져올 수도 있습니다.  
+
+
 {% highlight python %}
 x, y =  player.get_size()
 {% endhighlight %}

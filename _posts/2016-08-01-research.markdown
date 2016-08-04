@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "발표 평가지"
+date:   2016-02-12 17:50:00
+categories: main
+---
+[https://goo.gl/forms/UuUoZqtoOOWEhP793](https://goo.gl/forms/UuUoZqtoOOWEhP793)  
+발표할 때마다 발표자를 제외한 다른 조의 조원들은 위 링크로 가셔서 평가를 진행해 주세요.
+
+한 명이 여러 평가를 제출하는 일이 없도록 하세요.
