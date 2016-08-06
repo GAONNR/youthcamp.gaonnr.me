@@ -15,9 +15,8 @@
     <section class="page-header">
   <h1 class="project-name">2016 KAIST YOUTH CAMP</h1>
   <h2 class="project-tagline">Python Level 1 - Python을 활용한 퍼즐게임(테트리스) 만들기</h2>
-  <!--
-  <a href="#" class="btn">View on GitHub</a>
-  <a href="#" class="btn">Download .zip</a>
+  <a href="https://github.com/GAONNR/pygame_tetris/tree/tetris" class="btn">View on GitHub</a>
+  <a href="https://github.com/GAONNR/pygame_tetris/raw/master/TetrisPresentation.pdf" class="btn">Download PDF</a><!--
   <a href="#" class="btn">Download .tar.gz</a>
 -->
 </section>
@@ -26,6 +25,13 @@
     <section class="main-content">
       
       <div class="body">
+
+  <a href="/main/2016/02/13/research.html"><h1>발표 평가지</h1></a>
+  <p><a href="https://goo.gl/forms/UuUoZqtoOOWEhP793">https://goo.gl/forms/UuUoZqtoOOWEhP793</a><br />
+발표할 때마다 발표자를 제외한 다른 조의 조원들은 위 링크로 가셔서 평가를 진행해 주세요.</p>
+
+<p>한 명이 여러 평가를 제출하는 일이 없도록 하세요.</p>
+
 
   <a href="/main/2016/02/13/setting.html"><h1>개발환경 세팅하기</h1></a>
   <p>Python을 쓰려면 먼저 사전 작업이 조금 필요합니다.<br />
@@ -100,7 +106,7 @@ Wing IDE 101을 내려받습니다. 다른 IDE나 텍스트 에디터를 사용�
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="nb">type</span> <span class="o">==</span> <span class="n">KEYDOWN</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_RIGHT</span><span class="p">:</span>
         <span class="c"># source #</span>
-    <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_LEFT</span>
+    <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_LEFT</span><span class="p">:</span>
         <span class="c"># source #</span>
     <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">K_DOWN</span><span class="p">:</span>
         <span class="c"># source #</span>
@@ -215,19 +221,43 @@ while문은 어느 정도의 빠르기로 돌아가는 것일까요?<br />
 <a href="http://devnauts.tistory.com/61">http://devnauts.tistory.com/61</a> 등을 참고하시기 바랍니다.</p>
 
 
-  <a href="/main/2016/02/13/sample-content.html"><h1>Welcome to Jekyll!</h1></a>
-  <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory - edit this post and re-build (or run with the <code class="highlighter-rouge">-w</code> switch) to see your changes!
-To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention: YYYY-MM-DD-name-of-post.ext.</p>
+  <a href="/main/2016/02/13/pygame-example3.html"><h1>pygame 예제 - Step 3</h1></a>
+  <p>계획이 수정되었으므로, 여러분께 뭔가를 만들 때 좀 더 도움이 될 법한 함수를 몇 개 알려드리고자 합니다.
+먼저 <code class="highlighter-rouge">Surface.get_rect()</code> 함수입니다.</p>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">player</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'player_test.png'</span><span class="p">)</span>
+<span class="n">playerRect</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<p>pygame안에서 이미지는 거기에 외접한 사각형을 기준으로 처리됩니다. 이 사각형을 가져오는 함수입니다.</p>
 
-<p>Check out the <a href="http://jekyllrb.com">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/mojombo/jekyll">Jekyll’s GitHub repo</a>.</p>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">playerRect</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span></code></pre></figure>
+
+<p>이런 식으로 rect의 중심을 바꿀 수도 있으며, 그 후</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">playerRect</span><span class="p">)</span></code></pre></figure>
+
+<p>와 같은 코드로 원하는 좌표를 이미지의 중심으로 하게 할 수도 있습니다.</p>
+
+<p><code class="highlighter-rouge">Surface.get_size()</code> 함수를 이용하면 이미지나 Surface의 크기를 가져올 수도 있습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">player</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span></code></pre></figure>
+
+<p>다음은 <code class="highlighter-rouge">pygame.transform.flip()</code>함수입니다. 사용 예는 다음과 같습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">flipPlayer</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">flip</code> 함수의 첫 번째 인자는 x축을 반전하는 것을 뜻하며, 두 번째 인자는 y축을 반전하는 것을 뜻합니다.</p>
+
+<p>다음은 <code class="highlighter-rouge">pygame.transform.scale()</code> 함수입니다. 이는 불러온 이미지나 Surface를 원하는 크기로 확대 / 축소합니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">scaledPlayer</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="p">(</span><span class="n">newWidth</span><span class="p">,</span> <span class="n">newHeight</span><span class="p">))</span></code></pre></figure>
+
+<p>마지막으로 <code class="highlighter-rouge">pygame.transform.rotate()</code>함수입니다. 이미지나 Surface를 회전시켜 줍니다.<br />
+Surface를 회전시키면 rect의 크기가 달라질 수 있으므로, 표시할 좌표를 rect의 center를 변경시켜서 표현하는 것이 좋습니다.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">rotatedPlayer</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mf">60.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">))</span>
+<span class="n">rotatedRect</span> <span class="o">=</span> <span class="n">rotatedPlayer</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span>
+<span class="n">rotatedRect</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span></code></pre></figure>
 
 
 
